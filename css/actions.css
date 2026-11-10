@@ -1,0 +1,153 @@
+/* --------------------------------------------------------------------------
+   7. Menú de Acciones de 3 Puntos
+   -------------------------------------------------------------------------- */
+.action-cell {
+    position: relative;
+    text-align: right;
+    padding-right: 18px;
+}
+
+.action-menu-container {
+    position: relative;
+    display: inline-block;
+}
+
+.action-menu-trigger {
+    background: transparent;
+    border: 1px solid transparent;
+    color: var(--gray-500);
+    width: 30px;
+    height: 30px;
+    border-radius: var(--radius-sm);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.12s ease;
+}
+
+.action-menu-trigger:hover,
+.action-menu-trigger.active {
+    background: var(--gray-100);
+    color: var(--gray-900);
+    border-color: var(--gray-200);
+}
+
+.action-dropdown-menu {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    margin-top: 4px;
+    background: #ffffff;
+    border: 1px solid var(--gray-200);
+    border-radius: var(--radius-md);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+    min-width: 175px;
+    padding: 5px;
+    z-index: 100;
+    text-align: left;
+    animation: menuFadeIn 0.1s ease-out;
+}
+
+@keyframes menuFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-4px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.action-dropdown-menu.show {
+    display: block;
+}
+
+.dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 8px 10px;
+    font-size: 0.84rem;
+    color: var(--gray-700);
+    background: transparent;
+    border: none;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: background-color 0.12s, color 0.12s;
+    font-family: inherit;
+    text-align: left;
+}
+
+.dropdown-item:hover {
+    background-color: var(--gray-100);
+    color: var(--gray-900);
+}
+
+.dropdown-item svg {
+    color: var(--gray-500);
+    flex-shrink: 0;
+}
+
+.dropdown-item:hover svg {
+    color: var(--gray-800);
+}
+
+.dropdown-divider {
+    height: 1px;
+    background-color: var(--gray-100);
+    margin: 4px 0;
+}
+
+/* --------------------------------------------------------------------------
+   8. Botones Globales
+   -------------------------------------------------------------------------- */
+.btn {
+    font-family: inherit;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 7px 13px;
+    border-radius: var(--radius-sm);
+    font-size: 0.85rem;
+    font-weight: 500;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.btn-primary {
+    background-color: var(--primary);
+    color: #ffffff;
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-hover);
+}
+
+.btn-secondary {
+    background-color: #ffffff;
+    color: var(--gray-700);
+    border-color: var(--gray-300);
+}
+
+.btn-secondary:hover {
+    background-color: var(--gray-100);
+    color: var(--gray-900);
+}
+
+.btn-success {
+    background-color: var(--success);
+    color: #ffffff;
+}
+
+.btn-success:hover {
+    background-color: #047857;
+}
+

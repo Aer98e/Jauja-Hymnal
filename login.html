@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión · Himnario Jauja</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --primary:       #2563eb;
+            --primary-hover: #1d4ed8;
+            --danger:        #dc2626;
+            --danger-light:  #fef2f2;
+            --gray-50:  #f8fafc;
+            --gray-100: #f1f5f9;
+            --gray-200: #e2e8f0;
+            --gray-300: #cbd5e1;
+            --gray-400: #94a3b8;
+            --gray-500: #64748b;
+            --gray-700: #334155;
+            --gray-800: #1e293b;
+            --gray-900: #0f172a;
+            --radius:   10px;
+            --shadow:   0 4px 24px -4px rgb(0 0 0 / 0.12), 0 1px 4px -1px rgb(0 0 0 / 0.08);
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background: var(--gray-50);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 24px 16px;
+            color: var(--gray-800);
+        }
+
+        /* ---- Logo / branding ---- */
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 32px;
+            color: var(--gray-900);
+        }
+
+        .brand-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--gray-900);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            flex-shrink: 0;
+        }
+
+        .brand-text h1 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+        }
+
+        .brand-text p {
+            font-size: 0.78rem;
+            color: var(--gray-400);
+            margin-top: 1px;
+        }
+
+        /* ---- Card ---- */
+        .card {
+            background: #fff;
+            border: 1px solid var(--gray-200);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            width: 100%;
+            max-width: 360px;
+            padding: 32px 28px;
+        }
+
+        .card-header {
+            margin-bottom: 24px;
+        }
+
+        .card-header h2 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--gray-900);
+            letter-spacing: -0.015em;
+        }
+
+        .card-header p {
+            font-size: 0.84rem;
+            color: var(--gray-500);
+            margin-top: 4px;
+        }
+
+        /* ---- Form ---- */
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        label {
+            display: block;
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--gray-700);
+            margin-bottom: 6px;
+            letter-spacing: 0.01em;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 9px 12px;
+            border: 1px solid var(--gray-300);
+            border-radius: 7px;
+            font-size: 0.9rem;
+            font-family: inherit;
+            color: var(--gray-900);
+            background: #fff;
+            outline: none;
+            transition: border-color 0.15s, box-shadow 0.15s;
+        }
+
+        input[type="text"]:focus,
+        input[type="password"]:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+        }
+
+        /* ---- Error box ---- */
+        .error-box {
+            display: none;
+            background: var(--danger-light);
+            border: 1px solid #fca5a5;
+            border-radius: 7px;
+            color: var(--danger);
+            font-size: 0.84rem;
+            padding: 10px 12px;
+            margin-bottom: 16px;
+        }
+
+        /* ---- Submit button ---- */
+        .btn-submit {
+            width: 100%;
+            padding: 10px;
+            background: var(--gray-900);
+            color: #fff;
+            border: none;
+            border-radius: 7px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            font-family: inherit;
+            cursor: pointer;
+            transition: background 0.15s, opacity 0.15s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 4px;
+        }
+
+        .btn-submit:hover:not(:disabled) { background: var(--gray-800); }
+        .btn-submit:disabled { opacity: 0.6; cursor: not-allowed; }
+
+        /* Spinner inline */
+        .spinner {
+            width: 16px;
+            height: 16px;
+            border: 2px solid rgba(255,255,255,0.4);
+            border-top-color: #fff;
+            border-radius: 50%;
+            animation: spin 0.65s linear infinite;
+            display: none;
+        }
+
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* ---- Footer note ---- */
+        .login-footer {
+            margin-top: 20px;
+            font-size: 0.75rem;
+            color: var(--gray-400);
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="brand">
+        <div class="brand-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+            </svg>
+        </div>
+        <div class="brand-text">
+            <h1>Himnario Jauja</h1>
+            <p>Sistema de gestión de himnos</p>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <h2>Iniciar sesión</h2>
+            <p>Ingresa tus credenciales para continuar</p>
+        </div>
+
+        <div class="error-box" id="error-box"></div>
+
+        <form id="login-form" novalidate>
+            <div class="form-group">
+                <label for="username">Usuario</label>
+                <input
+                    type="text"
+                    id="username"
+                    name="username"
+                    autocomplete="username"
+                    autocapitalize="none"
+                    spellcheck="false"
+                    required
+                    placeholder="tu_usuario"
+                >
+            </div>
+            <div class="form-group">
+                <label for="password">Contraseña</label>
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    autocomplete="current-password"
+                    required
+                    placeholder="••••••••"
+                >
+            </div>
+
+            <button type="submit" class="btn-submit" id="submit-btn">
+                <span class="spinner" id="spinner"></span>
+                <span id="btn-label">Entrar</span>
+            </button>
+        </form>
+    </div>
+
+    <p class="login-footer">Acceso restringido · Solo personal autorizado</p>
+
+    <script>
+        // Si ya hay token válido (sin verificar expiración aquí), redirigir directamente
+        if (localStorage.getItem('access_token')) {
+            window.location.replace('/');
+        }
+
+        document.getElementById('login-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const username  = document.getElementById('username').value.trim();
+            const password  = document.getElementById('password').value;
+            const errorBox  = document.getElementById('error-box');
+            const submitBtn = document.getElementById('submit-btn');
+            const spinner   = document.getElementById('spinner');
+            const btnLabel  = document.getElementById('btn-label');
+
+            if (!username || !password) {
+                showError('Por favor, completa usuario y contraseña.');
+                return;
+            }
+
+            // Estado de carga
+            submitBtn.disabled = true;
+            spinner.style.display = 'block';
+            btnLabel.textContent = 'Verificando...';
+            errorBox.style.display = 'none';
+
+            try {
+                // OAuth2 password flow requiere application/x-www-form-urlencoded
+                const body = new URLSearchParams({ username, password });
+                const API_BASE = 'https://api-jauja.aer98e.com';
+                const res  = await fetch(`${API_BASE}/token`, { method: 'POST', body });
+                const data = await res.json();
+
+                if (!res.ok) {
+                    throw new Error(data.detail || 'Usuario o contraseña incorrectos.');
+                }
+
+                localStorage.setItem('access_token', data.access_token);
+                window.location.replace('/');
+
+            } catch (err) {
+                showError(err.message);
+            } finally {
+                submitBtn.disabled = false;
+                spinner.style.display = 'none';
+                btnLabel.textContent = 'Entrar';
+            }
+        });
+
+        function showError(msg) {
+            const box = document.getElementById('error-box');
+            box.textContent = msg;
+            box.style.display = 'block';
+        }
+    </script>
+</body>
+</html>
+

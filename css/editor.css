@@ -1,0 +1,144 @@
+/* --------------------------------------------------------------------------
+   11. Pestañas, Editor y Vista Previa de Letras
+   -------------------------------------------------------------------------- */
+.editor-tabs-bar {
+    padding: 10px 22px;
+    background: #ffffff;
+    border-bottom: 1px solid var(--gray-200);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.editor-tabs {
+    display: inline-flex;
+    background: var(--gray-100);
+    padding: 3px;
+    border-radius: var(--radius-md);
+    gap: 3px;
+}
+
+.editor-tab-btn {
+    background: transparent;
+    border: none;
+    padding: 5px 12px;
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--gray-600);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: all 0.12s ease;
+    font-family: inherit;
+}
+
+.editor-tab-btn:hover {
+    color: var(--gray-900);
+}
+
+.editor-tab-btn.active {
+    background: #ffffff;
+    color: var(--gray-900);
+    font-weight: 600;
+    box-shadow: var(--shadow-sm);
+}
+
+.quick-tags-bar {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.quick-tags-label {
+    font-size: 0.75rem;
+    color: var(--gray-400);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+.tag-insert-btn {
+    background: var(--gray-50);
+    border: 1px solid var(--gray-300);
+    color: var(--gray-700);
+    padding: 2px 7px;
+    border-radius: 4px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.12s ease;
+}
+
+.tag-insert-btn:hover {
+    background: var(--gray-200);
+    color: var(--gray-900);
+}
+
+.editor-textarea {
+    width: 100%;
+    height: 380px;
+    padding: 16px;
+    font-family: 'JetBrains Mono', ui-monospace, Consolas, monospace;
+    font-size: 0.92rem;
+    line-height: 1.65;
+    color: var(--gray-900);
+    background: #ffffff;
+    border: 1px solid var(--gray-300);
+    border-radius: var(--radius-md);
+    resize: vertical;
+    outline: none;
+    transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.editor-textarea:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+.lyrics-preview-container {
+    background-color: #ffffff;
+    border: 1px solid var(--gray-200);
+    border-radius: var(--radius-md);
+    padding: 18px;
+    min-height: 380px;
+    max-height: 55vh;
+    overflow-y: auto;
+    font-family: 'JetBrains Mono', ui-monospace, Consolas, monospace;
+    font-size: 0.92rem;
+    line-height: 1.7;
+}
+
+.preview-section-block {
+    margin-bottom: 18px;
+    padding: 12px 14px;
+    background: #fafbfc;
+    border: 1px solid #edf2f7;
+    border-radius: 8px;
+}
+
+.preview-section-block:last-child {
+    margin-bottom: 0;
+}
+
+.preview-tag-badge {
+    display: inline-block;
+    font-size: 0.78rem;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-bottom: 8px;
+    letter-spacing: 0.03em;
+    background-color: var(--gray-100);
+    color: var(--gray-700);
+    border: 1px solid var(--gray-200);
+}
+
+.preview-verse-line {
+    color: var(--gray-800);
+    line-height: 1.6;
+}
+
+/* --------------------------------------------------------------------------

@@ -1,0 +1,124 @@
+/* --------------------------------------------------------------------------
+   6. Tabla de Himnos y Estados
+   -------------------------------------------------------------------------- */
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    font-size: 0.9rem;
+}
+
+th {
+    background: var(--gray-50);
+    color: var(--gray-500);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 600;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--gray-200);
+}
+
+td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--gray-200);
+    color: var(--gray-700);
+    vertical-align: middle;
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+tbody tr {
+    transition: background-color 0.1s ease;
+}
+
+tbody tr:hover {
+    background-color: #f8fafc;
+}
+
+.hymn-title-cell {
+    font-weight: 600;
+    color: var(--gray-900);
+}
+
+.hymn-title-clickable {
+    color: var(--gray-900);
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: color 0.12s;
+}
+
+.hymn-title-clickable:hover {
+    color: var(--primary);
+}
+
+/* Indicadores de Estado */
+.status-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--gray-600);
+    white-space: nowrap;
+}
+
+.status-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.status-indicator.has-file .status-dot,
+.status-indicator.available .status-dot {
+    background-color: var(--success);
+    box-shadow: 0 0 0 2px rgba(5, 150, 105, 0.2);
+}
+
+.status-indicator.no-file .status-dot {
+    background-color: var(--gray-400);
+}
+
+.status-indicator.in-use {
+    color: var(--danger);
+    font-weight: 600;
+}
+
+.status-indicator.in-use .status-dot {
+    background-color: var(--danger);
+    box-shadow: 0 0 0 2px rgba(220, 38, 38, 0.2);
+}
+
+.status-indicator.available {
+    color: var(--success);
+}
+
+.dropdown-item.danger-action {
+    color: var(--danger);
+}
+
+.dropdown-item.danger-action:hover {
+    background: var(--danger-light);
+    color: var(--danger);
+}
+
+.dropdown-item.success-action {
+    color: var(--success);
+}
+
+.dropdown-item.success-action:hover {
+    background: var(--success-light);
+    color: var(--success);
+}
+
