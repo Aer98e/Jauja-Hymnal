@@ -1,4 +1,4 @@
-import { API_BASE } from './utils.js';
+import { API_BASE } from './shared.js';
 import { authFetch, getCurrentUser } from './auth.js';
 
 const ROLES = ['admin', 'member', 'helper', 'viewer'];
