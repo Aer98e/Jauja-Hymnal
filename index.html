@@ -35,20 +35,22 @@
                     </h1>
                     <p>Monitorea, visualiza, edita la letra y vincula documentos .docx con tus himnos.</p>
                 </div>
-                <button
-                    onclick="logout()"
-                    title="Cerrar sesión"
-                    style="flex-shrink: 0; display: inline-flex; align-items: center; gap: 6px; padding: 7px 12px; background: transparent; border: 1px solid var(--gray-200); border-radius: 7px; font-size: 0.82rem; font-weight: 500; color: var(--gray-500); cursor: pointer; font-family: inherit; transition: all 0.15s; white-space: nowrap;"
-                    onmouseover="this.style.borderColor='var(--gray-300)'; this.style.color='var(--gray-800)'; this.style.background='var(--gray-100)';"
-                    onmouseout="this.style.borderColor='var(--gray-200)'; this.style.color='var(--gray-500)'; this.style.background='transparent';"
-                >
-                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
-                        <polyline points="16 17 21 12 16 7"></polyline>
-                        <line x1="21" y1="12" x2="9" y2="12"></line>
-                    </svg>
-                    Salir
-                </button>
+                <div id="header-actions" style="display:flex; align-items:center; gap:8px; flex-shrink:0;">
+                    <button
+                        onclick="logout()"
+                        title="Cerrar sesión"
+                        style="flex-shrink: 0; display: inline-flex; align-items: center; gap: 6px; padding: 7px 12px; background: transparent; border: 1px solid var(--gray-200); border-radius: 7px; font-size: 0.82rem; font-weight: 500; color: var(--gray-500); cursor: pointer; font-family: inherit; transition: all 0.15s; white-space: nowrap;"
+                        onmouseover="this.style.borderColor='var(--gray-300)'; this.style.color='var(--gray-800)'; this.style.background='var(--gray-100)';"
+                        onmouseout="this.style.borderColor='var(--gray-200)'; this.style.color='var(--gray-500)'; this.style.background='transparent';"
+                    >
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                            <polyline points="16 17 21 12 16 7"></polyline>
+                            <line x1="21" y1="12" x2="9" y2="12"></line>
+                        </svg>
+                        Salir
+                    </button>
+                </div>
             </div>
         </header>
 
@@ -398,6 +400,73 @@
                     <button type="submit" class="btn btn-primary" id="comment-save-btn">Guardar comentario</button>
                 </div>
             </form>
+        </div>
+    </div>
+
+    <!-- 7. MODAL ADMINISTRACIÓN DE USUARIOS (solo admin) -->
+    <div id="users-admin-modal" class="modal">
+        <div class="modal-content modal-content-lg">
+            <div class="modal-header">
+                <div class="modal-header-info">
+                    <h3>Administrar usuarios</h3>
+                    <div class="meta">Registra usuarios y cambia roles (solo administradores)</div>
+                </div>
+                <button type="button" class="modal-close-btn" onclick="closeUsersModal()" title="Cerrar ventana">✕</button>
+            </div>
+            <div class="modal-body" style="padding-top: 20px;">
+                <div id="users-error-message" class="message-box error"></div>
+                <div id="users-success-message" class="message-box success"></div>
+
+                <section style="margin-bottom: 24px; padding: 16px; border: 1px solid var(--gray-200); border-radius: 8px;">
+                    <h4 style="margin-bottom: 12px; font-size: 0.95rem;">Registrar nuevo usuario</h4>
+                    <form id="create-user-form">
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; align-items: end;">
+                            <div>
+                                <label for="new-user-username" style="display:block; font-weight:500; font-size:0.84rem; margin-bottom:6px;">Usuario</label>
+                                <input id="new-user-username" type="text" class="control-select" style="width:100%;" maxlength="50" autocomplete="off" required>
+                            </div>
+                            <div>
+                                <label for="new-user-password" style="display:block; font-weight:500; font-size:0.84rem; margin-bottom:6px;">Contraseña</label>
+                                <input id="new-user-password" type="password" class="control-select" style="width:100%;" minlength="6" autocomplete="new-password" required>
+                            </div>
+                            <div>
+                                <label for="new-user-role" style="display:block; font-weight:500; font-size:0.84rem; margin-bottom:6px;">Rol</label>
+                                <select id="new-user-role" class="control-select" style="width:100%;">
+                                    <option value="viewer" selected>viewer</option>
+                                    <option value="helper">helper</option>
+                                    <option value="member">member</option>
+                                    <option value="admin">admin</option>
+                                </select>
+                            </div>
+                            <div>
+                                <button type="submit" id="create-user-btn" class="btn btn-primary" style="width:100%;">Crear usuario</button>
+                            </div>
+                        </div>
+                        <p style="margin-top:8px; font-size:0.78rem; color:var(--gray-500);">La contraseña debe tener al menos 6 caracteres.</p>
+                    </form>
+                </section>
+
+                <section>
+                    <h4 style="margin-bottom: 12px; font-size: 0.95rem;">Usuarios registrados</h4>
+                    <div class="table-responsive" style="max-height: 320px; overflow:auto;">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Usuario</th>
+                                    <th style="width:120px;">Rol actual</th>
+                                    <th style="width:260px; text-align:right;">Cambiar rol</th>
+                                </tr>
+                            </thead>
+                            <tbody id="users-tbody">
+                                <tr><td colspan="3" style="text-align:center; padding:20px; color:var(--gray-500);">Cargando...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="closeUsersModal()">Cerrar</button>
+            </div>
         </div>
     </div>
 

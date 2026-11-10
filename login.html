@@ -290,6 +290,9 @@
                 }
 
                 localStorage.setItem('access_token', data.access_token);
+                if (data.user) {
+                    localStorage.setItem('current_user', JSON.stringify(data.user));
+                }
                 window.location.replace('/');
 
             } catch (err) {

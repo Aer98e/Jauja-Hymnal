@@ -30,5 +30,16 @@ export async function authFetch(url, options = {}) {
 /** Cierra sesión: elimina el token y redirige al login. */
 export function logout() {
     localStorage.removeItem('access_token');
+    localStorage.removeItem('current_user');
     window.location.replace('/login.html');
+}
+
+/** Retorna el usuario actual almacenado en localStorage o null. */
+export function getCurrentUser() {
+    try {
+        const raw = localStorage.getItem('current_user');
+        return raw ? JSON.parse(raw) : null;
+    } catch {
+        return null;
+    }
 }

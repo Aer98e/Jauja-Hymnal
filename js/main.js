@@ -7,6 +7,7 @@ import * as hymns from './hymns.js?v=6.2.1';
 import * as viewer from './viewer.js';
 import * as editor from './editor.js';
 import * as uploads from './uploads.js?v=6.2.1';
+import * as usersAdmin from './users.js';
 
 function initApp() {
     // 1. Cargar catálogo de himnos
@@ -86,6 +87,13 @@ function initApp() {
         commentForm.addEventListener("submit", uploads.handleCommentSave);
     }
 
+    // 6.4 Administración de usuarios (solo admin)
+    usersAdmin.initAdminUsersUI();
+    const createUserForm = document.getElementById("create-user-form");
+    if (createUserForm) {
+        createUserForm.addEventListener("submit", usersAdmin.handleCreateUser);
+    }
+
     // 7. Botones en visor de letra
     const downloadBtn = document.getElementById("viewer-download-btn");
     if (downloadBtn) {
@@ -131,6 +139,7 @@ function initApp() {
             uploads.closeMusxModal();
             uploads.closeOriginalTitleModal();
             uploads.closeCommentModal();
+            usersAdmin.closeUsersModal();
             viewer.closeViewerModal();
         }
     });
@@ -147,6 +156,7 @@ function initApp() {
                 uploads.closeMusxModal();
                 uploads.closeOriginalTitleModal();
                 uploads.closeCommentModal();
+                usersAdmin.closeUsersModal();
                 viewer.closeViewerModal();
             }
         }
@@ -173,6 +183,8 @@ Object.assign(window, {
     closeOriginalTitleModal: uploads.closeOriginalTitleModal,
     openCommentModal: uploads.openCommentModal,
     closeCommentModal: uploads.closeCommentModal,
+    openUsersModal: usersAdmin.openUsersModal,
+    closeUsersModal: usersAdmin.closeUsersModal,
     handleMusxDownload: uploads.handleMusxDownload,
     toggleHymnStatus: uploads.toggleHymnStatus,
     toggleLyricsCheck: uploads.toggleLyricsCheck,
