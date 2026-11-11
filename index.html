@@ -403,6 +403,36 @@
         </div>
     </div>
 
+    <!-- 6.1 MODAL PARA CAMBIAR FASE -->
+    <div id="phase-modal" class="modal">
+        <div class="modal-content modal-content-sm">
+            <div class="modal-header">
+                <div class="modal-header-info">
+                    <h3 id="phase-modal-title">Cambiar fase</h3>
+                    <div class="meta" id="phase-modal-subtitle">Himno</div>
+                </div>
+                <button type="button" class="modal-close-btn" onclick="closePhaseModal()" title="Cerrar ventana">✕</button>
+            </div>
+            <form id="phase-form">
+                <div class="modal-body">
+                    <input type="hidden" id="phase-hymn-id">
+                    <div style="margin-bottom: 14px;">
+                        <label for="phase-select" style="display: block; font-weight: 500; font-size: 0.88rem; margin-bottom: 8px;">
+                            Fase:
+                        </label>
+                        <select id="phase-select" class="control-select" style="width: 100%;" required></select>
+                    </div>
+                    <div id="phase-error-message" class="message-box error"></div>
+                    <div id="phase-success-message" class="message-box success"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="closePhaseModal()">Cancelar</button>
+                    <button type="submit" class="btn btn-primary" id="phase-save-btn">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <!-- 7. MODAL ADMINISTRACIÓN DE USUARIOS (solo admin) -->
     <div id="users-admin-modal" class="modal">
         <div class="modal-content modal-content-lg">

@@ -340,6 +340,10 @@ export function renderTable() {
         // 3. Datos y comentarios
         dropdownItemsHtml += `<div class="dropdown-divider"></div>`;
         dropdownItemsHtml += `
+            <button type="button" class="dropdown-item" data-action="change-phase">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 3 21 3 21 8"></polyline><line x1="4" y1="20" x2="21" y2="3"></line><polyline points="21 16 21 21 16 21"></polyline><line x1="15" y1="15" x2="21" y2="21"></line><line x1="4" y1="4" x2="9" y2="9"></line></svg>
+                Cambiar fase
+            </button>
             <button type="button" class="dropdown-item" data-action="edit-original-title">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
                 Editar título original
@@ -447,6 +451,8 @@ export function renderTable() {
                     uploads.handleMusxDownload(hymn);
                 } else if (action === "upload-musx") {
                     uploads.openMusxModal(hymn.id, hymn.title);
+                } else if (action === "change-phase") {
+                    uploads.openPhaseModal(hymn);
                 } else if (action === "edit-original-title") {
                     uploads.openOriginalTitleModal(hymn);
                 } else if (action === "toggle-lyrics-check") {

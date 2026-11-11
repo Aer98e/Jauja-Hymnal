@@ -87,6 +87,12 @@ function initApp() {
         commentForm.addEventListener("submit", uploads.handleCommentSave);
     }
 
+    // 6.3.1 Formulario de cambio de fase
+    const phaseForm = document.getElementById("phase-form");
+    if (phaseForm) {
+        phaseForm.addEventListener("submit", uploads.handlePhaseSave);
+    }
+
     // 6.4 Administración de usuarios (solo admin)
     usersAdmin.initAdminUsersUI();
     const createUserForm = document.getElementById("create-user-form");
@@ -139,6 +145,7 @@ function initApp() {
             uploads.closeMusxModal();
             uploads.closeOriginalTitleModal();
             uploads.closeCommentModal();
+            uploads.closePhaseModal();
             usersAdmin.closeUsersModal();
             viewer.closeViewerModal();
         }
@@ -156,6 +163,7 @@ function initApp() {
                 uploads.closeMusxModal();
                 uploads.closeOriginalTitleModal();
                 uploads.closeCommentModal();
+                uploads.closePhaseModal();
                 usersAdmin.closeUsersModal();
                 viewer.closeViewerModal();
             }
@@ -183,6 +191,8 @@ Object.assign(window, {
     closeOriginalTitleModal: uploads.closeOriginalTitleModal,
     openCommentModal: uploads.openCommentModal,
     closeCommentModal: uploads.closeCommentModal,
+    openPhaseModal: uploads.openPhaseModal,
+    closePhaseModal: uploads.closePhaseModal,
     openUsersModal: usersAdmin.openUsersModal,
     closeUsersModal: usersAdmin.closeUsersModal,
     handleMusxDownload: uploads.handleMusxDownload,

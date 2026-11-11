@@ -340,3 +340,98 @@ export async function handleCommentSave(e) {
         saveBtn.textContent = "Guardar comentario";
     }
 }
+
+// ==========================================
+// 9. CAMBIO DE FASE
+// ==========================================
+export function openPhaseModal(hymn) {
+    const form = document.getElementById("phase-form");
+    if (form) form.reset();
+
+    document.getElementById("phase-hymn-id").value = hymn.id;
+    document.getElementById("phase-modal-subtitle").textContent = `Himno: "${hymn.title}"`;
+
+    const select = document.getElementById("phase-select");
+    const phases = Array.isArray(state.phasesData) ? state.phasesData : [];
+    select.innerHTML = "";
+
+    if (phases.length === 0) {
+        const opt = document.createElement("option");
+        opt.value = "";
+        opt.textContent = "No hay fases disponibles";
+        select.appendChild(opt);
+        select.disabled = true;
+    } else {
+        select.disabled = false;
+        phases.forEach((phase) => {
+            const opt = document.createElement("option");
+            opt.value = String(phase.id);
+            opt.textContent = phase.name;
+            select.appendChild(opt);
+        });
+
+        if (hymn.phase_id != null && phases.some(p => String(p.id) === String(hymn.phase_id))) {
+            select.value = String(hymn.phase_id);
+        }
+    }
+
+    const errBox = document.getElementById("phase-error-message");
+    if (errBox) errBox.style.display = "none";
+    const succBox = document.getElementById("phase-success-message");
+    if (succBox) succBox.style.display = "none";
+
+    document.getElementById("phase-modal").style.display = "flex";
+}
+
+export function closePhaseModal() {
+    const modal = document.getElementById("phase-modal");
+    if (modal) modal.style.display = "none";
+}
+
+export async function handlePhaseSave(e) {
+    e.preventDefault();
+
+    const hymnId = document.getElementById("phase-hymn-id").value;
+    const select = document.getElementById("phase-select");
+    const errorBox = document.getElementById("phase-error-message");
+    const successBox = document.getElementById("phase-success-message");
+    const saveBtn = document.getElementById("phase-save-btn");
+
+    errorBox.style.display = "none";
+    successBox.style.display = "none";
+
+    if (!select.value) {
+        errorBox.textContent = "Selecciona una fase válida.";
+        errorBox.style.display = "block";
+        return;
+    }
+
+    saveBtn.disabled = true;
+    saveBtn.textContent = "Guardando...";
+
+    try {
+        const response = await authFetch(`${API_BASE}/hymns/${hymnId}/phase`, {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ phase_id: Number(select.value) })
+        });
+        const result = await response.json();
+        if (!response.ok) {
+            throw new Error(result.detail || "Error al actualizar la fase.");
+        }
+
+        successBox.textContent = result.message || "Fase actualizada correctamente.";
+        successBox.style.display = "block";
+
+        setTimeout(async () => {
+            closePhaseModal();
+            await hymns.loadHymns(state.currentFilter);
+        }, 700);
+    } catch (err) {
+        errorBox.textContent = err.message;
+        errorBox.style.display = "block";
+    } finally {
+        saveBtn.disabled = false;
+        saveBtn.textContent = "Guardar";
+    }
+}
